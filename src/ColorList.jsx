@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 
-function ColorList({ colors }) {
+function ColorList( {colors} ) {
   return (
     <div>
-      <ul>
+      <ul style={
+        {listStyle: 'none'}
+      }>
         <h1>Hi</h1>
-        {colors.map(color => (
-          <li key={color}>
-            <Link to={`/colors/${color}`}>{color}</Link>
+        {Object.keys(colors).map((colorName) => (
+          <li key={colorName}>
+            <Link to={`/colors/${colorName}`}>{colorName}</Link>
           </li>
         ))}
       </ul>

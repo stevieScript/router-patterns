@@ -1,22 +1,26 @@
 import {useState} from 'react'
-import Color from './Color'
+import { useNavigate } from 'react-router-dom'
+
 
 function ColorForm({ addColor}) {
-  const INITIAL_STATE = {color: '', value: '#000000'}
+  const INITIAL_STATE = { color: "", value: "#000000"}
   const [formData, setFormData] = useState(INITIAL_STATE)
+  let nav = useNavigate()
+
 
   const handleChange = (e) => {
-    const {name, value} = e.target
+    // sets the input color name to the value of the color
     setFormData(formData => ({
       ...formData,
-      [name]: value
+      [e.target.name]: e.target.value
     }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addColor(formData)
+    addColor({[formData.color]: formData.value})
     setFormData(INITIAL_STATE)
+    nav('/colors')
   }
 
   return (

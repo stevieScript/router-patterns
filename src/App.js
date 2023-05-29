@@ -7,10 +7,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
 function App() {
-	const [colors, setColors] = useState(['red', 'green', 'blue']);
+	const [colors, setColors] = useState({
+		red: '#FF0000',
+		green: '#00FF00',
+		blue: '#0000FF',
+	});
 	const addColor = (color) => {
-		setColors((colors) => [...colors, color]);
+		setColors((colors) => ({ ...colors, ...color }));
 	};
+
 	return (
 		<div className='App'>
 			<BrowserRouter>
@@ -34,7 +39,7 @@ function App() {
 					<Route
 						exact
 						path='/colors/:color'
-						element={<Color />}
+						element={<Color colors={colors} />}
 					/>
 					<Route
 						path='*'
